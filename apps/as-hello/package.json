@@ -1,0 +1,12 @@
+{
+  "name": "as-hello",
+  "version": "0.1.0",
+  "description": "AssemblyScript anywhere runtime example",
+  "private": true,
+  "scripts": {
+    "build": "asc assembly/index.ts --outFile build/runtime_bg.wasm --exportRuntime --optimizeLevel 2"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.27.0"
+  }
+}

@@ -28,14 +28,10 @@ cargo build --manifest-path "$RUNTIME_DIR/Cargo.toml" \
 VENDOR_TMP="$(mktemp -d)"
 trap 'rm -rf "$VENDOR_TMP"' EXIT
 
-# Find the target dir from workspace root (one level up from REPO_ROOT if
-# the workspace Cargo.toml is at REPO_ROOT).
-TARGET_DIR="$REPO_ROOT/target"
-
 wasm-bindgen \
   --target web \
   --out-dir "$VENDOR_TMP" \
-  "$TARGET_DIR/wasm32-unknown-unknown/release/quicknote_runtime.wasm"
+  "$REPO_ROOT/target/wasm32-unknown-unknown/release/quicknote_runtime.wasm"
 
 DIST_VENDOR="$DIST_DIR/vendor"
 mkdir -p "$DIST_VENDOR"
@@ -49,11 +45,11 @@ mkdir -p "$DIST_DIR/src"
 cp "$EXT_DIR/manifest.json" "$DIST_DIR/manifest.json"
 
 # All JS, HTML, and CSS from the framework — no app-owned markup.
+# quicknote has no content script so content.js / content.css are omitted.
 cp "$ASSETS_DIR/browser-shim.js" "$DIST_DIR/src/browser-shim.js"
 cp "$ASSETS_DIR/background.js"   "$DIST_DIR/src/background.js"
 cp "$ASSETS_DIR/popup.js"        "$DIST_DIR/src/popup.js"
 cp "$ASSETS_DIR/popup.html"      "$DIST_DIR/src/popup.html"
 cp "$ASSETS_DIR/popup.css"       "$DIST_DIR/src/popup.css"
-# quicknote has no content script, so content.js / content.css are omitted.
 
 printf 'Built quicknote at %s\n' "$DIST_DIR"

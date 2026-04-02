@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "as-hello",
+  "version": "0.1.0",
+  "description": "AssemblyScript anywhere runtime — minimal WASM-driven popup.",
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "as-hello"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["vendor/*", "src/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

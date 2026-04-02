@@ -32,7 +32,7 @@ trap 'rm -rf "$VENDOR_TMP"' EXIT
 wasm-bindgen \
   --target web \
   --out-dir "$VENDOR_TMP" \
-  "$REPO_ROOT/../anywhere/target/wasm32-unknown-unknown/release/ai_anywhere_runtime.wasm"
+  "$REPO_ROOT/target/wasm32-unknown-unknown/release/ai_anywhere_runtime.wasm"
 
 DIST_VENDOR="$DIST_DIR/vendor"
 mkdir -p "$DIST_VENDOR"
@@ -55,6 +55,6 @@ cp "$ASSETS_DIR/popup.css"       "$DIST_DIR/src/popup.css"
 cp "$ASSETS_DIR/content.css"     "$DIST_DIR/src/content.css"
 
 # App-owned: crepus templates only.
-cp "$VIEWS_DIR/ui.crepus" "$DIST_DIR/views/ui.crepus"
+cp -r "$VIEWS_DIR/." "$DIST_DIR/views/"
 
 printf 'Built ai-anywhere at %s\n' "$DIST_DIR"

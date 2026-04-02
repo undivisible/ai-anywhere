@@ -61,9 +61,31 @@ pub fn app_manifest() -> Result<JsValue, JsValue> {
     serde_wasm_bindgen::to_value(&app_definition()).map_err(|err| JsValue::from_str(&err.to_string()))
 }
 
+const POPUP_CSS: &str = r#"
+body{margin:0;min-width:280px;font-family:system-ui,"Segoe UI",sans-serif;background:#1a1a2e;color:#e8e8f0}
+.qn-popup{display:flex;flex-direction:column}
+.qn-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#16213e;border-bottom:1px solid rgba(255,255,255,.08)}
+.qn-brand{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#7b8cde}
+.qn-count{font-size:11px;color:#666688}
+.qn-body{padding:6px;overflow-y:auto;max-height:260px}
+.qn-empty{padding:18px;text-align:center;color:#555577;font-size:13px}
+.qn-note{display:flex;align-items:flex-start;gap:6px;padding:7px 9px;margin-bottom:5px;background:rgba(255,255,255,.05);border-radius:8px;border:1px solid rgba(255,255,255,.07)}
+.qn-note-text{flex:1;font-size:13px;line-height:1.4;word-break:break-word}
+.qn-delete{flex-shrink:0;background:none;border:none;color:#555577;cursor:pointer;font-size:15px;padding:0 2px;line-height:1}
+.qn-delete:hover{color:#cc4444}
+.qn-footer{border-top:1px solid rgba(255,255,255,.08);background:#16213e}
+.qn-form{display:flex;gap:5px;padding:8px 10px}
+.qn-input{flex:1;padding:7px 9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:#e8e8f0;font-size:13px;outline:none}
+.qn-input:focus{border-color:#7b8cde}
+.qn-add{padding:7px 12px;background:#7b8cde;color:#fff;border:none;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer}
+.qn-add:hover{background:#6a7bcf}
+.qn-clear{display:block;width:100%;padding:6px 10px;background:none;border:none;border-top:1px solid rgba(255,255,255,.06);color:#555577;font-size:12px;cursor:pointer;text-align:center}
+.qn-clear:hover{color:#cc4444}
+"#;
+
 /// Called by the framework `popup.js` on startup and after every action.
 /// `state` is the raw `browser.storage.local` contents as a JS object.
-/// Returns `{ html }` for the full popup body.
+/// Returns `{ html, css }` — `css` is injected into `<head>` by popup.js.
 #[wasm_bindgen]
 pub fn render_popup(state: JsValue) -> Result<JsValue, JsValue> {
     let state_map: BTreeMap<String, Value> =
@@ -81,7 +103,12 @@ pub fn render_popup(state: JsValue) -> Result<JsValue, JsValue> {
     props.insert("note_count".to_string(), json!(note_count));
     props.insert("empty".to_string(), json!(empty));
 
-    render_entry("views/ui.crepus#NoteList", template_files(), props)
+    let rendered = render_entry("views/ui.crepus#NoteList", template_files(), props)?;
+    // Deserialise into a plain Value so we can add the css field.
+    let mut out: BTreeMap<String, Value> =
+        serde_wasm_bindgen::from_value(rendered).map_err(|e| JsValue::from_str(&e.to_string()))?;
+    out.insert("css".to_string(), json!(POPUP_CSS));
+    serde_wasm_bindgen::to_value(&out).map_err(|e| JsValue::from_str(&e.to_string()))
 }
 
 /// Called by `popup.js` event delegation on `[data-action]` clicks.
