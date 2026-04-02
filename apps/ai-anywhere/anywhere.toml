@@ -1,5 +1,8 @@
 [app]
 id = "ai-anywhere"
 name = "ai-anywhere"
-frontend_plugin = "crepuscularity"
-entry = "views/ui.crepus#Panel"
+description = "Render AI-generated widgets from code blocks on any AI assistant page."
+
+[permissions]
+browser = ["storage"]
+host = ["<all_urls>"]

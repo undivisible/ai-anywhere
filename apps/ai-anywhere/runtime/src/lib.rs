@@ -83,6 +83,13 @@ pub fn app_manifest() -> Result<JsValue, JsValue> {
     serde_wasm_bindgen::to_value(&app_definition()).map_err(|err| JsValue::from_str(&err.to_string()))
 }
 
+/// Returns a browser MV3 manifest.json string, generated entirely from Rust.
+/// The build CLI calls this after compiling WASM to produce dist/manifest.json.
+#[wasm_bindgen]
+pub fn generate_manifest() -> String {
+    app_definition().to_manifest_v3()
+}
+
 #[wasm_bindgen]
 pub fn browser_program() -> String {
     BrowserProgram::new()
