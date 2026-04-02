@@ -48,3 +48,19 @@ button aa-button aa-button-{kind} type="button" data-action="{action}"
 --- Badge
 div aa-badge aa-badge-{tone}
   "{label}"
+
+--- AnywhereShell
+div aa-panel-shell aa-anywhere-shell
+  div aa-header
+    div aa-header-copy
+      div aa-title
+        "{title}"
+      div aa-meta
+        "{widget_type} widget"
+  div aa-badges
+    div aa-badge aa-badge-accent
+      "{widget_type}"
+  div aa-actions
+    button aa-button aa-button-primary type="button" data-action="render"
+      "Render"
+  div aa-frame-host data-role="frame-host"

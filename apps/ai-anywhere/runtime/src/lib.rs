@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 
 use anywhere_core::plugin::{FrontendRenderRequest, PluginHost};
-use anywhere_core::widget::extract_widget_specs;
+use anywhere_core::widget::{extract_anywhere_widgets, extract_widget_specs};
 use anywhere_crepuscularity::{plugin as crepuscularity_plugin, PLUGIN_ID as CREPUSCULARITY_PLUGIN_ID};
 use anywhere_webext::api::{BrowserProgram, JsExpr, MessagePayload, StorageArea};
 use anywhere_webext::manifest::{ExtensionApp, ManifestSpec};
@@ -45,6 +45,12 @@ pub fn runtime_version() -> String {
 pub fn extract_specs(message: &str) -> Result<JsValue, JsValue> {
     let specs = extract_widget_specs(message);
     serde_wasm_bindgen::to_value(&specs).map_err(|err| JsValue::from_str(&err.to_string()))
+}
+
+#[wasm_bindgen]
+pub fn extract_widgets(message: &str) -> Result<JsValue, JsValue> {
+    let widgets = extract_anywhere_widgets(message);
+    serde_wasm_bindgen::to_value(&widgets).map_err(|err| JsValue::from_str(&err.to_string()))
 }
 
 #[wasm_bindgen]
