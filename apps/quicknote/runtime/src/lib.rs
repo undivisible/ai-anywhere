@@ -2,8 +2,8 @@ use std::collections::BTreeMap;
 
 use anywhere_core::plugin::{FrontendRenderRequest, PluginHost, PluginId};
 use anywhere_crepuscularity::{plugin as crepuscularity_plugin, PLUGIN_ID as CREPUSCULARITY_PLUGIN_ID};
-use anywhere_webext::api::{BrowserProgram, JsExpr, StorageArea};
-use anywhere_webext::manifest::{ExtensionApp, ManifestSpec};
+use crepuscularity_anywhere_webext::api::{BrowserProgram, JsExpr, StorageArea};
+use crepuscularity_anywhere_webext::manifest::{ExtensionApp, ManifestSpec};
 use serde_json::{json, Value};
 use wasm_bindgen::prelude::*;
 

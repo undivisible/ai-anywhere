@@ -1,7 +1,8 @@
 [package]
-name = "ai_anywhere_runtime"
-version = "0.2.0"
+name = "anywhere_runtime"
+version = "0.3.0"
 edition = "2021"
+description = "Anywhere AI extension - the main product"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -9,7 +10,7 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 anywhere-core.workspace = true
 anywhere-crepuscularity.workspace = true
-anywhere-webext.workspace = true
+crepuscularity-anywhere-webext.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 serde-wasm-bindgen.workspace = true

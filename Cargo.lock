@@ -3,22 +3,9 @@
 version = 4
 
 [[package]]
-name = "ai_anywhere_runtime"
-version = "0.2.0"
-dependencies = [
- "anywhere-core",
- "anywhere-crepuscularity",
- "anywhere-webext",
- "serde",
- "serde-wasm-bindgen",
- "serde_json",
- "wasm-bindgen",
-]
-
-[[package]]
 name = "anywhere-core"
 version = "0.2.0"
-source = "git+https://github.com/semitechnological/anywhere?branch=main#cf6ba0b723d2c20315deb11ddb80dde7b0a33d65"
+source = "git+https://github.com/semitechnological/anywhere?branch=refactor%2Fcrepuscularity-plugin#675110f0fe0a9f27f0964109d77d1d8f32e52170"
 dependencies = [
  "serde",
  "serde_json",
@@ -27,20 +14,23 @@ dependencies = [
 [[package]]
 name = "anywhere-crepuscularity"
 version = "0.2.0"
-source = "git+https://github.com/semitechnological/anywhere?branch=main#cf6ba0b723d2c20315deb11ddb80dde7b0a33d65"
+source = "git+https://github.com/semitechnological/anywhere?branch=refactor%2Fcrepuscularity-plugin#675110f0fe0a9f27f0964109d77d1d8f32e52170"
 dependencies = [
  "anywhere-core",
  "serde_json",
 ]
 
 [[package]]
-name = "anywhere-webext"
-version = "0.2.0"
-source = "git+https://github.com/semitechnological/anywhere?branch=main#cf6ba0b723d2c20315deb11ddb80dde7b0a33d65"
+name = "anywhere_runtime"
+version = "0.3.0"
 dependencies = [
  "anywhere-core",
+ "anywhere-crepuscularity",
+ "crepuscularity-anywhere-webext",
  "serde",
+ "serde-wasm-bindgen",
  "serde_json",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -54,6 +44,16 @@ name = "cfg-if"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
+
+[[package]]
+name = "crepuscularity-anywhere-webext"
+version = "0.3.0"
+source = "git+https://github.com/semitechnological/anywhere?branch=refactor%2Fcrepuscularity-plugin#675110f0fe0a9f27f0964109d77d1d8f32e52170"
+dependencies = [
+ "anywhere-core",
+ "serde",
+ "serde_json",
+]
 
 [[package]]
 name = "itoa"
@@ -94,11 +94,11 @@ dependencies = [
 
 [[package]]
 name = "quicknote_runtime"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anywhere-core",
  "anywhere-crepuscularity",
- "anywhere-webext",
+ "crepuscularity-anywhere-webext",
  "serde",
  "serde-wasm-bindgen",
  "serde_json",

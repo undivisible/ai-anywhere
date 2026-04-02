@@ -1,10 +1,10 @@
-# ai-anywhere
+# anywhere
 
-Example apps built with the [anywhere](../anywhere) framework — a Rust-first toolkit
-for browser extensions.
+The main Anywhere AI extension product - browser extensions built with
+crepuscularity-anywhere plugin.
 
 App authors write **Rust + `.crepus` templates only**. All JS bootstrap is
-framework-owned and lives in `../anywhere/crates/anywhere-webext/assets/`.
+framework-owned and lives in the crepuscularity-anywhere-webext crate.
 
 ## Apps
 
@@ -31,30 +31,12 @@ bash apps/quicknote/scripts/build.sh
 Each build produces an unpacked extension at `apps/<name>/dist/unpacked/`
 that can be loaded directly into Chrome or Firefox (Developer Mode).
 
-## Dependency layout
-
-```
-/home/undivisible/
-├── anywhere/          ← framework (crates/anywhere-*)
-├── crepuscularity/    ← crepus DSL runtime (used by anywhere-crepuscularity)
-└── ai-anywhere/       ← this repo (apps)
-```
-
-Both `anywhere` and `ai-anywhere` must be checked out side-by-side for the
-workspace path dependencies to resolve.
-
 ## Architecture
 
 Each app consists of:
 
-- `runtime/src/lib.rs` — WASM entry points (`browser_program()`, `render_frontend()`,
-  optional `render_popup()` + `handle_popup_action()`)
+- `runtime/src/lib.rs` — WASM entry points
 - `views/ui.crepus` — crepus component templates
-- `extension/manifest.json` — MV3 extension manifest
-- `extension/src/*.html` + `*.css` — HTML shells and styling (no JS)
+- Build scripts generate manifest.json from TOML config
 
-The framework (`anywhere-webext`) supplies:
-- `browser-shim.js` — unified Chrome/Firefox API bridge
-- `background.js` — service worker with settings messaging
-- `content.js` — WASM boot + widget scanning (for ai-anywhere style apps)
-- `popup.js` — dual-mode: WASM-driven render loop or default settings UI
+The framework supplies browser bootstrap JavaScript.

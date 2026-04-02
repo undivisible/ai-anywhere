@@ -6,9 +6,9 @@ members = [
 ]
 
 [workspace.dependencies]
-anywhere-core = { git = "https://github.com/semitechnological/anywhere", branch = "main" }
-anywhere-crepuscularity = { git = "https://github.com/semitechnological/anywhere", branch = "main" }
-anywhere-webext = { git = "https://github.com/semitechnological/anywhere", branch = "main" }
+anywhere-core = { git = "https://github.com/semitechnological/anywhere", branch = "refactor/crepuscularity-plugin" }
+anywhere-crepuscularity = { git = "https://github.com/semitechnological/anywhere", branch = "refactor/crepuscularity-plugin" }
+crepuscularity-anywhere-webext = { git = "https://github.com/semitechnological/anywhere", branch = "refactor/crepuscularity-plugin" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde-wasm-bindgen = "0.6"

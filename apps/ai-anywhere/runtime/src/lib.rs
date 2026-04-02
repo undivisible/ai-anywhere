@@ -3,8 +3,8 @@ use std::collections::BTreeMap;
 use anywhere_core::plugin::{FrontendRenderRequest, PluginHost};
 use anywhere_core::widget::{extract_anywhere_widgets, extract_widget_specs};
 use anywhere_crepuscularity::{plugin as crepuscularity_plugin, PLUGIN_ID as CREPUSCULARITY_PLUGIN_ID};
-use anywhere_webext::api::{BrowserProgram, JsExpr, MessagePayload, StorageArea};
-use anywhere_webext::manifest::{ExtensionApp, ManifestSpec};
+use crepuscularity_anywhere_webext::api::{BrowserProgram, JsExpr, MessagePayload, StorageArea};
+use crepuscularity_anywhere_webext::manifest::{ExtensionApp, ManifestSpec};
 use serde::Deserialize;
 use serde_json::{json, Value};
 use wasm_bindgen::prelude::*;
@@ -18,9 +18,9 @@ struct RenderRequest {
 
 fn app_definition() -> ExtensionApp {
     ExtensionApp::new(
-        "ai-anywhere",
+        "anywhere",
         ManifestSpec {
-            name: "ai-anywhere".to_string(),
+            name: "Anywhere".to_string(),
             version: env!("CARGO_PKG_VERSION").to_string(),
             description: "Render AI-generated widgets from code blocks on any page.".to_string(),
         },
