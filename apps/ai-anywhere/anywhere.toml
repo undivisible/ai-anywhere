@@ -1,0 +1,5 @@
+[app]
+id = "ai-anywhere"
+name = "ai-anywhere"
+frontend_plugin = "crepuscularity"
+entry = "views/ui.crepus#Panel"

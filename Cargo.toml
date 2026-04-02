@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = [
+    "apps/ai-anywhere/runtime",
+    "apps/quicknote/runtime",
+]
+
+[workspace.dependencies]
+anywhere-core = { git = "https://github.com/semitechnological/anywhere", branch = "main" }
+anywhere-crepuscularity = { git = "https://github.com/semitechnological/anywhere", branch = "main" }
+anywhere-webext = { git = "https://github.com/semitechnological/anywhere", branch = "main" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde-wasm-bindgen = "0.6"
+wasm-bindgen = "0.2"

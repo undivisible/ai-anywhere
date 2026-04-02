@@ -1,0 +1,50 @@
++++
+[Panel.defaults]
+warning = "Runs inside a sandboxed iframe. Review AI code before execution."
+show_source = true
+
+[ActionButton.defaults]
+kind = "secondary"
+
+[Badge.defaults]
+tone = "neutral"
++++
+
+--- Panel
+div aa-panel-shell
+  include views/ui.crepus#Header title={title} format={format}
+  div aa-warning
+    "{warning}"
+  div aa-badges
+    for badge in {badges}
+      include views/ui.crepus#Badge label={badge.label} tone={badge.tone}
+  include views/ui.crepus#ButtonRow actions={actions}
+  if {show_source}
+    details aa-details data-role="payload" hidden="hidden"
+      summary aa-summary
+        "Widget payload"
+      pre aa-code
+        "{payload}"
+  div aa-frame-host data-role="frame-host"
+
+--- Header
+div aa-panel
+  div aa-header
+    div aa-header-copy
+      div aa-title
+        "{title}"
+      div aa-meta
+        "{format} component"
+
+--- ButtonRow
+div aa-actions
+  for action in {actions}
+    include views/ui.crepus#ActionButton label={action.label} action={action.action} kind={action.kind}
+
+--- ActionButton
+button aa-button aa-button-{kind} type="button" data-action="{action}"
+  "{label}"
+
+--- Badge
+div aa-badge aa-badge-{tone}
+  "{label}"

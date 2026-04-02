@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "ai-anywhere",
+  "version": "0.2.0",
+  "description": "Render AI-generated widgets from code blocks on any AI assistant page.",
+  "permissions": ["storage"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "ai-anywhere"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content.js"],
+      "css": ["src/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["vendor/*", "src/*", "views/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
