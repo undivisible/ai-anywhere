@@ -1,0 +1,149 @@
+if {show_crepus}
+  div class="popup popup--help"
+    div class="popup__nav"
+      button class="popup__back" type="button" data-action="hide-crepus"
+        "← Help"
+    h1 class="popup__title"
+      "Crepus syntax"
+    div class="popup__help-section"
+      p class="popup__copy"
+        "Crepus is an indent-based template language. Children are indented one level below their parent."
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Elements"
+      pre class="popup__prompt"
+        "tag class1 class2 attr=\"val\" dynattr={expr}
+  \"child text with {variable} interpolation\"
+  span another-class
+    \"{nested}\""
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Conditionals"
+      pre class="popup__prompt"
+        "if {condition}
+  div
+    \"shown when true\"
+else if {other}
+  span
+    \"else-if branch\"
+else
+  span
+    \"fallback\""
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Loops"
+      pre class="popup__prompt"
+        "for item in {items}
+  div row
+    \"{item.name} — {item.value}\""
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Match"
+      pre class="popup__prompt"
+        "match {status}
+  \"ok\" =>
+    span green
+      \"Success\"
+  \"error\" =>
+    span red
+      \"Failed\"
+  _ =>
+    span
+      \"Unknown\""
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Variables"
+      pre class="popup__prompt"
+        "$: let label = {\"Hello, \" + name}
+$: default title = {\"Untitled\"}"
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Include"
+      pre class="popup__prompt"
+        "include ui.crepus#Button label=\"Click\" count={total}"
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Component file (ui.crepus)"
+      pre class="popup__prompt"
+        "+++
+[Button.defaults]
+label = \"Click\"
+variant = \"primary\"
++++
+
+--- Button
+button {variant}
+  \"{label}\""
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Data attributes for actions"
+      pre class="popup__prompt"
+        "button primary type=\"button\" data-action=\"submit\" data-id={item.id}
+  \"Submit\""
+      p class="popup__copy"
+        "Any data-* attribute is collected and passed to handle_popup_action as the data map."
+else if {show_help}
+  div class="popup popup--help"
+    div class="popup__nav"
+      button class="popup__back" type="button" data-action="hide-help"
+        "← Back"
+    h1 class="popup__title"
+      "How to use AI Anywhere"
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "What it does"
+      p class="popup__copy"
+        "AI Anywhere scans AI assistant pages for special widget tags in responses and renders them as interactive panels — charts, forms, visualisations, and more."
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Add this to your AI system prompt"
+      p class="popup__copy"
+        "Paste the following into your AI's system prompt or custom instructions:"
+      div class="popup__code-block"
+        div class="popup__code-header"
+          span class="popup__code-label"
+            "System prompt"
+          button class="popup__copy-btn" type="button" data-action="copy-prompt"
+            span class="material-symbols-outlined"
+              "content_copy"
+            "Copy"
+        pre class="popup__prompt" id="system-prompt"
+          "{system_prompt}"
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Rendering"
+      p class="popup__copy"
+        "Widgets appear below AI messages. Click Render to run them in a sandboxed iframe. Enable Auto-render to run them automatically."
+    div class="popup__help-section"
+      h2 class="popup__help-heading"
+        "Legacy format"
+      p class="popup__copy"
+        "Code blocks with widget-html / widget-css / widget-js fences also work."
+    div class="popup__help-section"
+      button class="popup__crepus-btn" type="button" data-action="show-crepus"
+        "Crepus syntax reference →"
+else
+  div class="popup"
+    div class="popup__eyebrow"
+      "crepuscularity"
+    div class="popup__header"
+      h1 class="popup__title"
+        "AI Anywhere"
+      button class="popup__help-btn" type="button" data-action="show-help" title="How to use"
+        "?"
+    p class="popup__copy"
+      "Scan AI assistant pages for code blocks and render them as interactive widgets."
+    label class="popup__toggle"
+      if {enabled}
+        input type="checkbox" id="enabled" data-action="set-enabled" checked
+      else
+        input type="checkbox" id="enabled" data-action="set-enabled"
+      span
+        "Enable scanner"
+    label class="popup__toggle"
+      if {auto_render}
+        input type="checkbox" id="autoRender" data-action="set-auto-render" checked
+      else
+        input type="checkbox" id="autoRender" data-action="set-auto-render"
+      span
+        "Auto-render widgets"

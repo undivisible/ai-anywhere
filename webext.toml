@@ -1,8 +1,10 @@
-[app]
-id = "ai-anywhere"
-name = "ai-anywhere"
+[extension]
+name = "anywhere"
+version = "0.3.0"
 description = "Render AI-generated widgets from code blocks on any AI assistant page."
 
-[permissions]
-browser = ["storage"]
-host = ["<all_urls>"]
+[capabilities]
+storage = true
+background-script = true
+content-script = true
+host-permissions = ["<all_urls>"]

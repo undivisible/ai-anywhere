@@ -2,16 +2,16 @@
 name = "anywhere_runtime"
 version = "0.3.0"
 edition = "2021"
-description = "Anywhere AI extension - the main product"
+description = "Anywhere — render AI-generated widgets on any page"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-anywhere-core.workspace = true
-anywhere-crepuscularity.workspace = true
-crepuscularity-anywhere-webext.workspace = true
-serde.workspace = true
-serde_json.workspace = true
-serde-wasm-bindgen.workspace = true
-wasm-bindgen.workspace = true
+crepuscularity-web.workspace    = true
+crepuscularity-core.workspace   = true
+crepuscularity-webext.workspace = true
+serde.workspace                 = true
+serde_json.workspace            = true
+serde-wasm-bindgen.workspace    = true
+wasm-bindgen.workspace          = true
